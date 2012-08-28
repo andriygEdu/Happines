@@ -26,11 +26,18 @@ const CGFloat MOUNT_MAX_DOWN = 0.15;
 
 @synthesize scale = _scale;
 
-- (id)initWithFrame:(CGRect)frame
+- (void) awakeFromNib
+{
+    [super awakeFromNib];
+
+    _scale = DEFAULT_FACE_SCALE;
+}
+
+- (id) initWithFrame: (CGRect) frame
 {
     self = [super initWithFrame:frame];
     if (self) {
-        // Initialization code
+        _scale = DEFAULT_FACE_SCALE;
     }
     return self;
 }
@@ -43,7 +50,7 @@ const CGFloat MOUNT_MAX_DOWN = 0.15;
     
     [color setStroke];
 
-    CGContextAddArc( ctx, x, y, radius, 0, 2 * M_PI, 1 );
+    CGContextAddEllipseInRect( ctx, CGRectMake( x - radius, y - radius, radius * 2, radius * 2 ) );
     CGContextStrokePath( ctx );
 
     if ( fill ) {
@@ -78,9 +85,9 @@ const CGFloat MOUNT_MAX_DOWN = 0.15;
     
     CGFloat radius;
     if ( self.bounds.size.height < self.bounds.size.width ) {
-        radius = self.bounds.size.height / 2 * DEFAULT_FACE_SCALE;
+        radius = self.bounds.size.height / 2 * _scale;
     } else {
-        radius = self.bounds.size.width / 2 * DEFAULT_FACE_SCALE;
+        radius = self.bounds.size.width / 2 * _scale;
     }
     
     [self drawCircleWithContext: ctx X: self.bounds.size.width / 2
@@ -117,6 +124,12 @@ const CGFloat MOUNT_MAX_DOWN = 0.15;
                     self.bounds.size.height / 2 + radius * ( MOUTH_Y_DISP + MOUNT_MAX_DOWN ) )];
     [self drawBezierPath: ctx path: path
                    color: [UIColor blueColor]];
+}
+
+- (void) resizeFace: (CGFloat) factor {
+    _scale = _scale * factor;
+    
+    [self setNeedsDisplay];
 }
 
 @end

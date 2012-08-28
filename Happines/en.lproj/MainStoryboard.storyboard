@@ -8,35 +8,41 @@
         <scene sceneID="5">
             <objects>
                 <viewController id="2" customClass="HappinesViewController" sceneMemberID="viewController">
-                    <view key="view" contentMode="scaleToFill" id="3">
+                    <view key="view" contentMode="scaleToFill" id="4oY-19-SMW" customClass="HappinesFaceView">
                         <rect key="frame" x="0.0" y="20" width="320" height="460"/>
-                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                        <subviews>
-                            <view translatesAutoresizingMaskIntoConstraints="NO" contentMode="scaleToFill" id="4oY-19-SMW" customClass="HappinesFaceView">
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
-                                <connections>
-                                    <outletCollection property="gestureRecognizers" destination="Bqe-Gn-RAw" appends="YES" id="NjF-S9-wQl"/>
-                                </connections>
-                            </view>
-                        </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
-                        <constraints>
-                            <constraint firstItem="4oY-19-SMW" firstAttribute="leading" secondItem="3" secondAttribute="leading" type="default" id="NVi-pP-PMz"/>
-                            <constraint firstAttribute="bottom" secondItem="4oY-19-SMW" secondAttribute="bottom" constant="20" symbolic="YES" type="default" id="OQh-PB-fEh"/>
-                            <constraint firstItem="4oY-19-SMW" firstAttribute="top" secondItem="3" secondAttribute="top" constant="-20" id="ZKl-gE-SUE"/>
-                            <constraint firstItem="4oY-19-SMW" firstAttribute="trailing" secondItem="3" secondAttribute="trailing" type="default" id="kEv-h6-tzF"/>
-                        </constraints>
+                        <connections>
+                            <outletCollection property="gestureRecognizers" destination="Bqe-Gn-RAw" appends="YES" id="EaR-sk-AxZ"/>
+                        </connections>
                     </view>
+                    <connections>
+                        <outlet property="hapinnesView" destination="4oY-19-SMW" id="dIQ-Dg-KVy"/>
+                        <outlet property="pitchRecognizer" destination="Bqe-Gn-RAw" id="WIg-gi-vPv"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="4" sceneMemberID="firstResponder"/>
                 <pinchGestureRecognizer id="Bqe-Gn-RAw">
                     <connections>
+                        <action selector="pitch:" destination="2" id="bHe-WP-8IL"/>
                         <outlet property="delegate" destination="4oY-19-SMW" id="gDb-XR-to3"/>
                     </connections>
                 </pinchGestureRecognizer>
             </objects>
         </scene>
     </scenes>
+    <classes>
+        <class className="HappinesFaceView" superclassName="UIView">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/HappinesFaceView.h"/>
+        </class>
+        <class className="HappinesViewController" superclassName="UIViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/HappinesViewController.h"/>
+            <relationships>
+                <relationship kind="action" name="pitch:"/>
+                <relationship kind="outlet" name="hapinnesView" candidateClass="HappinesFaceView"/>
+                <relationship kind="outlet" name="pitchRecognizer" candidateClass="UIPinchGestureRecognizer"/>
+            </relationships>
+        </class>
+    </classes>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">
         <simulatedStatusBarMetrics key="statusBar"/>
         <simulatedOrientationMetrics key="orientation"/>

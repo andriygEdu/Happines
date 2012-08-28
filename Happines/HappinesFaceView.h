@@ -10,4 +10,6 @@
 
 @interface HappinesFaceView : UIView
 
+- (void) resizeFace: (CGFloat) factor;
+
 @end
