@@ -10,4 +10,6 @@
 
 @interface HappinesViewController : UIViewController
 
+@property CGFloat happiness;
+
 @end

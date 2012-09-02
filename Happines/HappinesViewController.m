@@ -9,21 +9,21 @@
 #import "HappinesViewController.h"
 #import "HappinesFaceView.h"
 
-@interface HappinesViewController ()
+@interface HappinesViewController () <HappinessForView>
 
-- (IBAction) pitch: (id) sender;
+- (IBAction) pitch: (UIPinchGestureRecognizer*) sender;
+- (IBAction) pan: (UIPanGestureRecognizer*) sender;
 
-@property IBOutlet UIPinchGestureRecognizer* pitchRecognizer;
 @property IBOutlet HappinesFaceView* hapinnesView;
 
 @end
 
 @implementation HappinesViewController
 
-@synthesize pitchRecognizer = _pitchRecognizer;
 @synthesize hapinnesView = _hapinnesView;
+@synthesize happiness = _happiness;
 
-- (void)viewDidLoad
+- (void) viewDidLoad
 {
     [super viewDidLoad];
 	// Do any additional setup after loading the view, typically from a nib.
@@ -35,11 +35,26 @@
     // Dispose of any resources that can be recreated.
 }
 
-- (IBAction) pitch: (id) sender
+- (IBAction) pitch: (UIPinchGestureRecognizer*) recognizer
 {
-    NSLog( @"Pith received %g", _pitchRecognizer.scale );
-    [_hapinnesView resizeFace: _pitchRecognizer.scale];
-    _pitchRecognizer.scale = 1;
+    if ( recognizer.state == UIGestureRecognizerStateChanged
+            || recognizer.state == UIGestureRecognizerStateEnded )
+    {
+        [_hapinnesView resizeFace: recognizer.scale];
+        recognizer.scale = 1;
+    }
+}
+
+- (IBAction) pan: (UIPanGestureRecognizer*) recognizer
+{
+    if ( recognizer.state == UIGestureRecognizerStateChanged
+        || recognizer.state == UIGestureRecognizerStateEnded )
+    {
+        CGPoint translation = [recognizer translationInView: _hapinnesView];
+        _happiness += - translation.y / 100;
+        [recognizer setTranslation: CGPointZero inView: _hapinnesView];
+        [_hapinnesView setNeedsDisplay];
+    }
 }
 
 @end

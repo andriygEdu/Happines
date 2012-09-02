@@ -11,6 +11,7 @@
 @interface HappinesFaceView()
 
 @property CGFloat scale;
+@property IBOutlet id<HappinessForView> happinessProvider;
 
 @end
 
@@ -20,7 +21,7 @@ const CGFloat EYES_X_DISP = 0.35;
 const CGFloat EYES_RADIUS = 0.10;
 const CGFloat MOUTH_Y_DISP = 0.35;
 const CGFloat MOUTH_HALF_WITH = 0.40;
-const CGFloat MOUNT_MAX_DOWN = 0.15;
+const CGFloat MOUNT_MAX_DOWN = 0.20;
 
 @implementation HappinesFaceView
 
@@ -105,23 +106,28 @@ const CGFloat MOUNT_MAX_DOWN = 0.15;
                          radius: radius * EYES_RADIUS
                           color: [UIColor blueColor] fill: [UIColor lightGrayColor]];
     // Mouth
+    CGFloat happiness = _happinessProvider.happiness;
+    if ( happiness > 1 ) {
+        happiness = 1;
+    } else  if ( happiness < -1 ) {
+        happiness = -1;
+    }
+
     UIBezierPath *path = [UIBezierPath bezierPath];
+    CGFloat middleY = self.bounds.size.height / 2 + radius * ( MOUTH_Y_DISP + MOUNT_MAX_DOWN * happiness);
     [path moveToPoint: 
         CGPointMake( self.bounds.size.width / 2 - radius * MOUTH_HALF_WITH,
                     self.bounds.size.height / 2 + radius * MOUTH_Y_DISP )];
-    [path addQuadCurveToPoint: CGPointMake( self.bounds.size.width / 2,
-                    self.bounds.size.height / 2 + radius * ( MOUTH_Y_DISP + MOUNT_MAX_DOWN ) )
+    [path addQuadCurveToPoint: CGPointMake( self.bounds.size.width / 2, middleY )
                  controlPoint: CGPointMake(
                     self.bounds.size.width / 2 - radius * MOUTH_HALF_WITH / 2,
-                    self.bounds.size.height / 2 + radius * ( MOUTH_Y_DISP + MOUNT_MAX_DOWN ) )];
+                    middleY )];
     [path moveToPoint:
      CGPointMake( self.bounds.size.width / 2 + radius * MOUTH_HALF_WITH,
                  self.bounds.size.height / 2 + radius * MOUTH_Y_DISP )];
-    [path addQuadCurveToPoint: CGPointMake( self.bounds.size.width / 2,
-                    self.bounds.size.height / 2 + radius * ( MOUTH_Y_DISP + MOUNT_MAX_DOWN ) )
+    [path addQuadCurveToPoint: CGPointMake( self.bounds.size.width / 2, middleY )
                  controlPoint: CGPointMake(
-                    self.bounds.size.width / 2 + radius * MOUTH_HALF_WITH / 2,
-                    self.bounds.size.height / 2 + radius * ( MOUTH_Y_DISP + MOUNT_MAX_DOWN ) )];
+                    self.bounds.size.width / 2 + radius * MOUTH_HALF_WITH / 2, middleY )];
     [self drawBezierPath: ctx path: path
                    color: [UIColor blueColor]];
 }

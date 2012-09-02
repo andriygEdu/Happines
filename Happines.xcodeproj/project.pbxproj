@@ -15,6 +15,7 @@
 		951E475B15EA1C8F00A93798 /* HappinesAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 951E475A15EA1C8F00A93798 /* HappinesAppDelegate.m */; };
 		951E475E15EA1C8F00A93798 /* MainStoryboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 951E475C15EA1C8F00A93798 /* MainStoryboard.storyboard */; };
 		951E476115EA1C8F00A93798 /* HappinesViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 951E476015EA1C8F00A93798 /* HappinesViewController.m */; };
+		95B83BD715F3C8740039D17D /* HappinesFaceSelectorViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 95B83BD615F3C8740039D17D /* HappinesFaceSelectorViewController.m */; };
 		95E92ACD15EAABCF00624B3B /* HappinesFaceView.m in Sources */ = {isa = PBXBuildFile; fileRef = 95E92ACC15EAABCF00624B3B /* HappinesFaceView.m */; };
 /* End PBXBuildFile section */
 
@@ -32,6 +33,8 @@
 		951E475D15EA1C8F00A93798 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = en; path = en.lproj/MainStoryboard.storyboard; sourceTree = "<group>"; };
 		951E475F15EA1C8F00A93798 /* HappinesViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HappinesViewController.h; sourceTree = "<group>"; };
 		951E476015EA1C8F00A93798 /* HappinesViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HappinesViewController.m; sourceTree = "<group>"; };
+		95B83BD515F3C8740039D17D /* HappinesFaceSelectorViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HappinesFaceSelectorViewController.h; sourceTree = "<group>"; };
+		95B83BD615F3C8740039D17D /* HappinesFaceSelectorViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HappinesFaceSelectorViewController.m; sourceTree = "<group>"; };
 		95E92ACB15EAABCF00624B3B /* HappinesFaceView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HappinesFaceView.h; sourceTree = "<group>"; };
 		95E92ACC15EAABCF00624B3B /* HappinesFaceView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HappinesFaceView.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -88,6 +91,8 @@
 				951E475115EA1C8F00A93798 /* Supporting Files */,
 				95E92ACB15EAABCF00624B3B /* HappinesFaceView.h */,
 				95E92ACC15EAABCF00624B3B /* HappinesFaceView.m */,
+				95B83BD515F3C8740039D17D /* HappinesFaceSelectorViewController.h */,
+				95B83BD615F3C8740039D17D /* HappinesFaceSelectorViewController.m */,
 			);
 			path = Happines;
 			sourceTree = "<group>";
@@ -171,6 +176,7 @@
 				951E475B15EA1C8F00A93798 /* HappinesAppDelegate.m in Sources */,
 				951E476115EA1C8F00A93798 /* HappinesViewController.m in Sources */,
 				95E92ACD15EAABCF00624B3B /* HappinesFaceView.m in Sources */,
+				95B83BD715F3C8740039D17D /* HappinesFaceSelectorViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -8,6 +8,11 @@
 
 #import <UIKit/UIKit.h>
 
+@protocol HappinessForView
+    @property (readonly) CGFloat happiness;
+@end
+
+
 @interface HappinesFaceView : UIView
 
 - (void) resizeFace: (CGFloat) factor;
