@@ -22,6 +22,7 @@
 
 @synthesize hapinnesView = _hapinnesView;
 @synthesize happiness = _happiness;
+@synthesize confusion = _confusion;
 
 - (void) viewDidLoad
 {
@@ -51,7 +52,21 @@
         || recognizer.state == UIGestureRecognizerStateEnded )
     {
         CGPoint translation = [recognizer translationInView: _hapinnesView];
+        
         _happiness += - translation.y / 100;
+        if ( _happiness < -1 ) {
+            _happiness = -1;
+        } else if ( _happiness > 1) {
+            _happiness = 1;
+        }
+
+        _confusion += - translation.x / 100;
+        if ( _confusion < -1 ) {
+            _confusion = -1;
+        } else if ( _confusion > 1) {
+            _confusion = 1;
+        }
+        
         [recognizer setTranslation: CGPointZero inView: _hapinnesView];
         [_hapinnesView setNeedsDisplay];
     }

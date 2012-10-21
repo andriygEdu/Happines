@@ -10,6 +10,7 @@
 
 @protocol HappinessForView
     @property (readonly) CGFloat happiness;
+    @property (readonly) CGFloat confusion;
 @end
 
 

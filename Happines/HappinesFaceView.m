@@ -20,8 +20,9 @@ const CGFloat EYES_Y_DISP = 0.35;
 const CGFloat EYES_X_DISP = 0.35;
 const CGFloat EYES_RADIUS = 0.10;
 const CGFloat MOUTH_Y_DISP = 0.35;
-const CGFloat MOUTH_HALF_WITH = 0.40;
+const CGFloat MOUTH_HALF_WITH = 0.50;
 const CGFloat MOUNT_MAX_DOWN = 0.20;
+const CGFloat CONFUSION_MAX_DISP = 0.50;
 
 @implementation HappinesFaceView
 
@@ -112,22 +113,31 @@ const CGFloat MOUNT_MAX_DOWN = 0.20;
     } else  if ( happiness < -1 ) {
         happiness = -1;
     }
+    
+    CGFloat confusion = _happinessProvider.confusion;
+    if ( confusion > 1 ) {
+        confusion = 1;
+    } else if ( confusion < -1 ) {
+        confusion = -1;
+    }
 
     UIBezierPath *path = [UIBezierPath bezierPath];
     CGFloat middleY = self.bounds.size.height / 2 + radius * ( MOUTH_Y_DISP + MOUNT_MAX_DOWN * happiness);
+    CGFloat confusionDisp = MOUTH_HALF_WITH * CONFUSION_MAX_DISP * confusion * radius;
     [path moveToPoint: 
         CGPointMake( self.bounds.size.width / 2 - radius * MOUTH_HALF_WITH,
                     self.bounds.size.height / 2 + radius * MOUTH_Y_DISP )];
-    [path addQuadCurveToPoint: CGPointMake( self.bounds.size.width / 2, middleY )
+    [path addQuadCurveToPoint: CGPointMake( self.bounds.size.width / 2 + confusionDisp, middleY )
                  controlPoint: CGPointMake(
-                    self.bounds.size.width / 2 - radius * MOUTH_HALF_WITH / 2,
+                    self.bounds.size.width / 2 + ( confusionDisp - radius * MOUTH_HALF_WITH ) / 2,
                     middleY )];
     [path moveToPoint:
      CGPointMake( self.bounds.size.width / 2 + radius * MOUTH_HALF_WITH,
                  self.bounds.size.height / 2 + radius * MOUTH_Y_DISP )];
-    [path addQuadCurveToPoint: CGPointMake( self.bounds.size.width / 2, middleY )
+    [path addQuadCurveToPoint: CGPointMake( self.bounds.size.width / 2 + confusionDisp, middleY )
                  controlPoint: CGPointMake(
-                    self.bounds.size.width / 2 + radius * MOUTH_HALF_WITH / 2, middleY )];
+                    self.bounds.size.width / 2 + ( confusionDisp + radius * MOUTH_HALF_WITH ) / 2,
+                    middleY )];
     [self drawBezierPath: ctx path: path
                    color: [UIColor blueColor]];
 }

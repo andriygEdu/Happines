@@ -11,5 +11,6 @@
 @interface HappinesViewController : UIViewController
 
 @property CGFloat happiness;
+@property CGFloat confusion;
 
 @end
